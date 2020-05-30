@@ -1,2 +1,0 @@
-class ActivityLogController < ApplicationController
-end
