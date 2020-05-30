@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :activities, only: [:index]
-    resources :babies, only: [:index, :show]
-    resources :activity_logs, only: [:index, :update]
+    resources :babies, only: [:index, :show] do
+      resources :activity_logs, only: [:index]
+    end
+    resources :activity_logs, only: [:index, :create, :update]
   end
 end
