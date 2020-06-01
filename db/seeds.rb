@@ -11,3 +11,10 @@ Assistant.create(name: 'Lupe', address: 'Some Address #1', phone: '111 111 1111'
 Activity.create(name: 'eat', description: 'baby is eating')
 Activity.create(name: 'play', description: 'baby is playing')
 Activity.create(name: 'sleep', description: 'baby is sleeping')
+
+Baby.create(name: 'Lupito', birthday: Date.new(2020,2,3), mother_name: 'Juanita', father_name: 'Juanito', address: 'baby street 111, babycity, babyland', phone: '555 555 5555');
+
+now = Time.now()
+
+ActivityLog.create( baby_id: 1,  assistant_id: 1,  activity_id: 1,  start_time: now,
+stop_time:now + 655,  duration: (now + 655) - now,  name: 'Act 1',  comments: 'This was na awesome activity 1')
