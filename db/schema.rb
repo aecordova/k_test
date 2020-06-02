@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 2020_05_29_194251) do
     t.integer "baby_id"
     t.integer "assistant_id"
     t.integer "activity_id"
-    t.time "start_time"
-    t.time "stop_time"
-    t.time "duration"
+    t.datetime "start_time"
+    t.datetime "stop_time"
+    t.integer "duration"
     t.string "name"
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false

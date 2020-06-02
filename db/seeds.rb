@@ -16,5 +16,4 @@ Baby.create(name: 'Lupito', birthday: Date.new(2020,2,3), mother_name: 'Juanita'
 
 now = Time.now()
 
-ActivityLog.create( baby_id: 1,  assistant_id: 1,  activity_id: 1,  start_time: now,
-stop_time:now + 655,  duration: (now + 655) - now,  name: 'Act 1',  comments: 'This was na awesome activity 1')
+ActivityLog.create( baby_id: 1,  assistant_id: 1,  activity_id: 1,  start_time: now,  name: 'Act 1')

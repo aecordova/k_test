@@ -11,10 +11,9 @@ class Api::ActivityLogsController < ApiController
   end
 
   def update
-    if @activity_log.update!(upd_activity_log_params)
-      render json: @activity_log, status: :ok
-      puts 'updated'
-    end
+    return unless @activity_log.update!(upd_activity_log_params)
+
+    render json: @activity_log
   end
 
   private
