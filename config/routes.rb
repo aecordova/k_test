@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     resources :babies, only: [:index], param: :id do
       resources :activity_logs, only: [:index]
     end
-    resources :activity_logs, only: [:create, :update, :index]
+    resources :activity_logs, only: [:create, :update]
   end
+
+  resources :activity_logs, only: [:index]
+
 end
