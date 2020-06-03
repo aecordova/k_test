@@ -1,6 +1,7 @@
 module ActivityLogsHelper
-  def status_in_words(status)
-    ['En proceso', 'Terminado'][status]
+  def status_in_words(status) 
+    # 1:on, 0:off, When the activity is in progress it's ON, hence: 1.  
+    ['Terminado', 'En progreso'][status] 
   end
 
   def format_time(time)

@@ -6,7 +6,8 @@ class ActivityLog < ApplicationRecord
   belongs_to :baby
   belongs_to :assistant
 
-  scope :newest_first, -> { order('start_time DESC') }
+  scope :newest_first, ->{ order('start_time DESC') }
+  scope :baby_filtered, ->(baby = nil){ where('baby_id = ?', baby.id ) unless baby.nil? }
 
   def status
     stop_time.nil? ? 1 : 0
@@ -15,7 +16,6 @@ class ActivityLog < ApplicationRecord
   def duration_in_min 
     (duration/60).to_f unless duration.nil?
   end
-  
 
   private
 

@@ -3,22 +3,25 @@ class Api::ActivityLogsController < ApiController
   before_action :get_activity_log, only: [:update]
 
   def index
-    @activity_logs = @baby.activity_logs
+    @activity_logs = ActivityLog.all.baby_filtered(@baby)
   end
 
   def create
-    render json: @activity_log, status: :ok if @activity_log = ActivityLog.create(new_activity_log_params)
+    return unless @activity_log = ActivityLog.create(new_activity_log_params)
+
+    render json: @activity_log, status: :ok
   end
 
   def update
     return unless @activity_log.update!(upd_activity_log_params)
 
-    render json: @activity_log
+    render json: @activity_log, status: :ok
   end
 
   private
 
   def get_baby
+    return if params[:baby_id].nil?
     @baby = Baby.find(params[:baby_id])
   end
 

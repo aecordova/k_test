@@ -3,10 +3,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults:{ format: JSON } do
     resources :activities, only: [:index]
+    resources :assistants, only: [:index]
     resources :babies, only: [:index], param: :id do
       resources :activity_logs, only: [:index]
     end
-    resources :activity_logs, only: [:create, :update]
+    resources :activity_logs, only: [:create, :update, :index]
   end
 
   resources :activity_logs, only: [:index]
