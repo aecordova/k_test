@@ -1,3 +1,7 @@
 class ActivityLogsController < ApplicationController
-  def index; end
+  def index
+    @activity_logs = ActivityLog.all
+  end
+
+
 end

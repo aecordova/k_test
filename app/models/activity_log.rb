@@ -6,6 +6,15 @@ class ActivityLog < ApplicationRecord
   belongs_to :baby
   belongs_to :assistant
 
+  def status
+    stop_time.nil? ? 1 : 0
+  end
+
+  def duration_in_min 
+    (duration/60).to_f unless duration.nil?
+  end
+  
+
   private
 
   def stop_after_start

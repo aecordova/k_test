@@ -1,10 +1,10 @@
 <h1>Log de Actividades</h1>
 
-<div class="filter-form d-flex">
+<div class="filter-form">
   <div class="filter-container">
     <div class="filter-group">
       <label for="baby-filter">Bebés</label>
-      <input class="filter-input" id="baby-filter" list="baby-list" type="text" placeholder="Seleccione Bebe" />
+      <input class="filter-input" id="baby-filter" list="baby-list" type="text" placeholder="Seleccione Bebe"/>
       <datalist id="baby-list">
         <option>Baby Name</option>
       </datalist>
@@ -29,26 +29,30 @@
  </div>
 </div>
 <div class="activity-list">
-  <table class="table table-bordered">
+  <table class="table">
   <thead class="table-head">
     <tr class = "table-header-row">
       <th class="table-header">Bebé</th>
       <th class="table-header">Asistente</th>
       <th class="table-header">Actividad</th>
       <th class="table-header">Inicio</th>
+      <th class="table-header">Finalización</th>
       <th class="table-header">Status</th>
-      <th class="table-header">Duracion</th>
+      <th class="table-header">Duración</th>
     </tr>
   </thead>
   <tbody class="table-body">
-    <tr class="table-row">
-      <td class="table-item">Mark</td>
-      <td class="table-item">Otto</td>
-      <td class="table-item">@mdo</td>
-      <td class="table-item">@mdo</td>
-      <td class="table-item">@mdo</td>
-      <td class="table-item">@mdo</td>
-    </tr>
+  <% @activity_logs.each do |log| %>
+    <%= content_tag :tr, class: 'table-row' do %>
+      <%= content_tag :td, log.baby.name, class: 'table-item' %>
+      <%= content_tag :td, log.assistant.name, class: 'table-item' %>
+      <%= content_tag :td, log.activity.name, class: 'table-item' %>
+      <%= content_tag :td, format_time(log.start_time.localtime), class: 'table-item' %>
+      <%= content_tag :td, format_time(log.stop_time.localtime), class: 'table-item' %>
+      <%= content_tag :td, status_in_words(log.status), class: 'table-item' %>
+      <%= content_tag :td, log.duration_in_min, class: 'table-item' %>
+    <% end %>
+  <% end %>
   </tbody>
  </table> 
 </div>
