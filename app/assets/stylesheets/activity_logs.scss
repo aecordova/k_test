@@ -1,3 +1,101 @@
 // Place all the styles related to the Activity_Logs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+body{
+  display: grid;
+  grid-template-columns: 5% 1fr 5%;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  color: #1B75BB;
+  font-size: 2rem;
+  grid-column: 2/3;
+}
+
+label{
+  font-size: smaller;
+}
+
+datalist{
+  background-color: #fff;
+  color: black;
+}
+
+.filter-form {
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  justify-content: space-evenly;
+  margin-bottom: 1.5rem;
+}
+
+
+.filter-container{
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.filter-group{
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+
+.button-container{
+  grid-column: 2;
+  display: grid;
+  justify-items: end;
+  align-items: end;
+}
+
+.filter-input{
+  padding: 5px;
+}
+
+
+.filter-submit{
+  height: fit-content;
+  background-color: #1B75BB;
+  outline: none;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 25px;
+}
+
+.filter-submit:hover{
+  background-color: rgba($color: #1B75BB, $alpha: .8);
+  cursor: pointer;
+}
+
+.activity-list{
+  grid-column: 2/3;
+}
+
+.table{
+  width: 100%;
+  border: 1px solid #646464;
+  border-collapse: collapse;
+}
+
+.table-head{
+  background-color: #1B75BB;
+  font-size: smaller;
+}
+
+.table-body{
+  font-size: smaller;
+}
+
+.table-header-row {
+  text-align: left;
+}
+
+.table-item, .table-header{
+  border: solid 1px #646464;
+  padding: 5px;
+}
+
