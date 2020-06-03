@@ -5,23 +5,29 @@
     <div class="filter-group">
       <label for="baby-filter">Bebés</label>
       <input class="filter-input" id="baby-filter" list="baby-list" type="text" placeholder="Seleccione Bebe"/>
-      <datalist id="baby-list">
-        <option>Baby Name</option>
-      </datalist>
+     <%= content_tag :datalist, id:'baby-list' do %>
+      <% list(@activity_logs,:baby, :name).each do |b| %>
+        <%= content_tag :option,'', value: b  %>
+      <% end %>
+     <% end %>
     </div>
     <div class="filter-group">
       <label for="assistant-filter">Asistentes</label>
       <input class="filter-input" id="assistant-filter" list="assistant-list" type="text" placeholder="Seleccione Asistente" />
-      <datalist id="assistant-list">
-        <option>Baby Name</option>
-      </datalist>
+     <%= content_tag :datalist, id:'assistant-list' do %>
+      <% list(@activity_logs,:assistant, :name).each do |b| %>
+        <%= content_tag :option,'', value: b  %>
+      <% end %>
+     <% end %>
     </div>
     <div class="filter-group">
       <label for="status-filter">Estatus</label>
       <input class="filter-input" id="status-filter" list="status-list" type="text" placeholder="Seleccione Estatus" />
-      <datalist id="status-list">
-        <option>Baby Name</option>
-      </datalist>
+     <%= content_tag :datalist, id:'status-list' do %>
+      <% list(@activity_logs,:status).each do |b| %>
+        <%= content_tag :option,'', value: status_in_words(b)  %>
+      <% end %>
+     <% end %>
     </div>
   </div>
  <div class="button-container">
@@ -29,30 +35,24 @@
  </div>
 </div>
 <div class="activity-list">
-  <table class="table">
-  <thead class="table-head">
-    <tr class = "table-header-row">
-      <th class="table-header">Bebé</th>
-      <th class="table-header">Asistente</th>
-      <th class="table-header">Actividad</th>
-      <th class="table-header">Inicio</th>
-      <th class="table-header">Finalización</th>
-      <th class="table-header">Status</th>
-      <th class="table-header">Duración</th>
-    </tr>
-  </thead>
-  <tbody class="table-body">
-  <% @activity_logs.each do |log| %>
-    <%= content_tag :tr, class: 'table-row' do %>
-      <%= content_tag :td, log.baby.name, class: 'table-item' %>
-      <%= content_tag :td, log.assistant.name, class: 'table-item' %>
-      <%= content_tag :td, log.activity.name, class: 'table-item' %>
-      <%= content_tag :td, format_time(log.start_time.localtime), class: 'table-item' %>
-      <%= content_tag :td, format_time(log.stop_time.localtime), class: 'table-item' %>
-      <%= content_tag :td, status_in_words(log.status), class: 'table-item' %>
-      <%= content_tag :td, log.duration_in_min, class: 'table-item' %>
+  <%= content_tag :table, class: 'table' do  %>
+    <%= content_tag :thead, class: 'table-head' do  %>
+      <%= content_tag(:tr, class:'table-header-row') do %>
+        <% ['Bebé','Asistente','Actividad','Inicio','Estatus','Duración'].each do |h| %>
+          <%= content_tag :th, h, class: 'table-header'  %>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-  </tbody>
- </table> 
+    <%= content_tag :tbody, class: 'table-body' do  %>
+      <% @activity_logs.each do |al| %>
+        <%= content_tag(:tr, class:'table-row') do %>
+          <% [al.baby.name, al.assistant.name, al.activity.name,
+              format_time(al.start_time.localtime), status_in_words(al.status),
+              al.duration.nil? ? '*' : al.duration_in_min].each do |d| %>
+              <%= content_tag :td, d, class: 'table-item'  %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+ <% end %> 
 </div>

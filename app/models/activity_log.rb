@@ -6,6 +6,8 @@ class ActivityLog < ApplicationRecord
   belongs_to :baby
   belongs_to :assistant
 
+  scope :newest_first, -> { order('start_time DESC') }
+
   def status
     stop_time.nil? ? 1 : 0
   end
