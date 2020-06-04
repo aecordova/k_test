@@ -3,10 +3,10 @@ class ActivityLogsController < ApplicationController
   def index
     @activity_logs
   end
-  
+
   private
-  
-  def get_activity_logs
+
+  def fetch_activity_logs
     @activity_logs = ActivityLog.all.includes(:baby, :assistant, :activity).newest_first
   end
 end

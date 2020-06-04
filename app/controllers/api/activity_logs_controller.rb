@@ -1,6 +1,6 @@
 class Api::ActivityLogsController < ApiController
-  before_action :get_baby, only: [:index]
-  before_action :get_activity_log, only: [:update]
+  before_action :fetch_baby, only: [:index]
+  before_action :fetch_activity_log, only: [:update]
 
   def index
     @activity_logs = ActivityLog.all.baby_filtered(@baby)
@@ -20,12 +20,13 @@ class Api::ActivityLogsController < ApiController
 
   private
 
-  def get_baby
+  def fetch_baby
     return if params[:baby_id].nil?
+
     @baby = Baby.find(params[:baby_id])
   end
 
-  def get_activity_log
+  def fetch_activity_log
     @activity_log = ActivityLog.find(params[:id])
   end
 
