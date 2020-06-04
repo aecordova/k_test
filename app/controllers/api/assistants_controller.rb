@@ -1,4 +1,4 @@
-class Api::AssistantsController < ApiController
+class Api::AssistantsController < Api::ApiController
   def index
     @assistants = Assistant.all
   end

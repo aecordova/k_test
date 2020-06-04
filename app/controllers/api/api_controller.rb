@@ -1,4 +1,4 @@
-class ApiController < ActionController::Base
+class Api::ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response

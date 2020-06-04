@@ -1,4 +1,4 @@
-class Api::ActivityLogsController < ApiController
+class Api::ActivityLogsController < Api::ApiController
   before_action :fetch_baby, only: [:index]
   before_action :fetch_activity_log, only: [:update]
 
