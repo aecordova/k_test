@@ -20,7 +20,7 @@ class ActivityLog < ApplicationRecord
   private
 
   def stop_after_start
-    errors.add(:stop_time, "Stop time can't be before start time") if !stop_time.nil? && start_time >= stop_time
+    errors.add(:stop_time, "Stop time can't be before start time") unless stop_time.nil? ||start_time < stop_time
   end
 
   def set_duration
