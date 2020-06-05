@@ -32,8 +32,8 @@ class SessionsController < ApplicationController
   def session_params
     params.require(:user).permit(:username, :password)
   end
-  
+
   def fetch_user
-    @user = User.find_by(username: session_params[:username])  
+    @user = User.find_by(username: session_params[:username])
   end
 end
