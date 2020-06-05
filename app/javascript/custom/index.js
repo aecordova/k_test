@@ -5,30 +5,22 @@ document.addEventListener('turbolinks:load', () => {
   const statusFilter = document.getElementById('status-filter');
   const dataTable = document.getElementById('acts-table-body');
 
-  console.log(window.location);
-
   const babyColumn = 0;
   const assistantColumn = 1;
   const statusColumn = 4;
 
-  if (filterSubmit) {
-    filterSubmit.addEventListener('click', () => {
-      const filters = [
-        babyFilter.value,
-        assistantFilter.value,
-        statusFilter.value,
-      ];
-      const columns = [babyColumn, assistantColumn, statusColumn];
-      filterTable(dataTable, filters, columns, 'Todos');
-    });
-  }
+  const clearFilter = (table) => {
+    for (let i = 0; i < table.rows.length; i += 1) {
+      table.rows[i].style.display = '';
+    }
+  };
+
   const filterTable = (table, filters, columns, all) => {
     clearFilter(table);
     const { rows } = table;
     const matches = [];
     for (let i = 0; i < rows.length; i += 1) {
       const cellValues = [];
-      const matched = false;
       columns.forEach((c) => {
         cellValues.push(rows[i].cells[c].textContent.toUpperCase());
       });
@@ -41,16 +33,21 @@ document.addEventListener('turbolinks:load', () => {
           matches[ind] = false;
         }
       });
-
       if (matches.includes(false)) {
         rows[i].style.display = 'none';
       }
     }
   };
 
-  const clearFilter = (table) => {
-    for (let i = 0; i < table.rows.length; i += 1) {
-      table.rows[i].style.display = '';
-    }
-  };
+  if (filterSubmit) {
+    filterSubmit.addEventListener('click', () => {
+      const filters = [
+        babyFilter.value,
+        assistantFilter.value,
+        statusFilter.value,
+      ];
+      const columns = [babyColumn, assistantColumn, statusColumn];
+      filterTable(dataTable, filters, columns, 'Todos');
+    });
+  }
 });
