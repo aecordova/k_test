@@ -1,5 +1,7 @@
 class ActivityLogsController < ApplicationController
-  before_action :get_activity_logs, only: [:index]
+  before_action :fetch_activity_logs, only: [:index]
+  before_action :login_first
+
   def index
     @activity_logs
   end
