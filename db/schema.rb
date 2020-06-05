@@ -12,44 +12,46 @@
 
 ActiveRecord::Schema.define(version: 2020_06_04_184251) do
 
-  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "activity_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "activity_logs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "baby_id"
     t.integer "assistant_id"
     t.integer "activity_id"
     t.datetime "start_time"
     t.datetime "stop_time"
     t.integer "duration"
-    t.string "name"
     t.text "comments"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_logs_on_activity_id"
+    t.index ["assistant_id"], name: "index_activity_logs_on_assistant_id"
+    t.index ["baby_id"], name: "index_activity_logs_on_baby_id"
   end
 
-  create_table "assistants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "assistants", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.text "address"
-    t.string "phone"
     t.string "group"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "address"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "babies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "babies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.date "birthday"
     t.string "mother_name"
     t.string "father_name"
-    t.text "address"
+    t.string "address"
     t.string "phone"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -61,4 +63,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_184251) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "activity_logs", "activities"
+  add_foreign_key "activity_logs", "assistants"
+  add_foreign_key "activity_logs", "babies"
 end
