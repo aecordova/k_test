@@ -1,0 +1,65 @@
+<%= content_tag :div, class: 'logout-container' do%>
+  <%= link_to 'Cerrar Sesión', logout_path, class: 'logout-link' %>
+<% end %>
+
+<h1>Log de Actividades</h1>
+
+<div class="filter-form">
+  <div class="filter-container">
+    <div class="filter-group">
+      <label for="baby-filter">Bebés</label>
+      <input class="filter-input" id="baby-filter" list="baby-list" type="text" placeholder="Seleccione Bebe"/>
+      <%= content_tag :datalist, id:'baby-list' do %>
+        <%= content_tag :option,'', value: 'Todos'  %>
+        <% list(@activity_logs,:baby, :name).each do |b| %>
+          <%= content_tag :option,'', value: b  %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="filter-group">
+      <label for="assistant-filter">Asistentes</label>
+      <input class="filter-input" id="assistant-filter" list="assistant-list" type="text" placeholder="Seleccione Asistente" />
+      <%= content_tag :datalist, id:'assistant-list' do %>
+        <%= content_tag :option,'', value: 'Todos'  %>
+        <% list(@activity_logs,:assistant, :name).each do |b| %>
+          <%= content_tag :option,'', value: b  %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="filter-group">
+      <label for="status-filter">Estatus</label>
+      <input class="filter-input" id="status-filter" list="status-list" type="text" placeholder="Seleccione Estatus" />
+      <%= content_tag :datalist, id:'status-list' do %>
+        <%= content_tag :option,'', value: 'Todos'  %>
+        <% list(@activity_logs,:status).each do |b| %>
+          <%= content_tag :option,'', value: status_in_words(b)  %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="button-container">
+    <button class="submit" id="filter-submit-btn" type="submit">Filtrar</button>   
+  </div>
+</div>
+<div class="activity-list">
+  <%= content_tag :table, id:'acts-table', class: 'table' do  %>
+    <%= content_tag :thead, class: 'table-head' do  %>
+      <%= content_tag(:tr, class:'table-header-row') do %>
+        <% ['Bebé','Asistente','Actividad','Inicio','Estatus','Duración'].each do |h| %>
+          <%= content_tag :th, h, class: 'table-header'  %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= content_tag :tbody, id:'acts-table-body', class: 'table-body' do  %>
+      <% @activity_logs.each do |al| %>
+        <%= content_tag(:tr, class:'table-row') do %>
+          <% [al.baby.name, al.assistant.name, al.activity.name,
+              format_time(al.start_time.localtime), status_in_words(al.status),
+              al.duration.nil? ? '*' : "#{ al.duration_in_min } min."].each do |d| %>
+              <%= content_tag :td, d, class: 'table-item'  %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %> 
+</div>

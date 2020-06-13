@@ -1,0 +1,120 @@
+// Place all the styles related to the Activity_Logs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+body{
+  display: grid;
+  grid-template-columns: 5% 1fr 5%;
+  // font-family: 'Roboto', sans-serif;
+  font-family: 'Varela Round', sans-serif;
+}
+
+h1 {
+  color: #1B75BB;
+  font-size: 2rem;
+  grid-column: 2/3;
+}
+
+label{
+  color: #282828;
+  font-size: smaller;
+}
+
+.logout-container{
+  grid-column: 2/3;
+  text-align: right;
+}
+
+.logout-link {
+  font-size: x-small; 
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.filter-form {
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  justify-content: space-evenly;
+  margin-bottom: 1.5rem;
+}
+
+.filter-container{
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.filter-group{
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+
+.button-container{
+  grid-column: 2;
+  display: grid;
+  justify-items: end;
+  align-items: end;
+}
+
+.filter-input{
+  padding: 5px;
+}
+
+.submit{
+  height: fit-content;
+  background-color: #1B75BB;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 25px;
+}
+
+.submit:hover{
+  background-color: rgba($color: #1B75BB, $alpha: .8);
+  cursor: pointer;
+}
+
+.activity-list{
+  grid-column: 2/3;
+}
+
+.table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-head{
+  background-color: #1B75BB;
+  border: solid 1.5px rgba(238, 238, 238, 1);
+  font-size: smaller;
+}
+
+.table-header-row {
+  color: #fff;
+}
+
+.table-header {
+  padding: 5px;
+  border: solid 1.5px rgba(238, 238, 238, 1);
+}
+
+.table-body{
+  font-size: smaller;
+  color: #282828;
+  background-color: rgba($color: #1B75BB, $alpha: .05);
+}
+
+.table-row:nth-child(odd) {
+  background-color: #fff;
+}
+
+.table-item{
+  border: solid 1.5px rgba($color: #1B75BB, $alpha: .3);
+  padding: 5px;
+  text-align: center;
+}
+
