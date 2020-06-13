@@ -1,6 +1,8 @@
 class ActivityLog < ApplicationRecord
   validate :stop_after_start
   before_update :set_duration
+  
+  include Filterable
 
   belongs_to :activity
   belongs_to :baby

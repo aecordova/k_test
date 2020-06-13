@@ -1,9 +1,9 @@
 class Api::ActivityLogsController < Api::ApiController
-  before_action :fetch_baby, only: [:index]
-  before_action :fetch_activity_log, only: [:update]
+  before_action :fetch_activity_log, only: [:update] # single
+  before_action :fetch_activity_logs, only: [:index] # collection, filtered
 
   def index
-    @activity_logs = ActivityLog.all.baby_filtered(@baby)
+    @activity_logs
   end
 
   def create
@@ -20,10 +20,13 @@ class Api::ActivityLogsController < Api::ApiController
 
   private
 
-  def fetch_baby
-    return if params[:baby_id].nil?
-
-    @baby = Baby.find(params[:baby_id])
+  def fetch_activity_logs
+    # To AVOID SQL INJECTION, Super important to explicitly accept only the parameters we need when using filter_by. 
+    @activity_logs = if params[:baby_id].nil?
+                      ActivityLog.all
+                    else
+                      ActivityLog.filter_by(params.slice(:baby_id))
+                    end
   end
 
   def fetch_activity_log
